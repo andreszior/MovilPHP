@@ -2,6 +2,7 @@ package com.example.movilphp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initComponents();
+        conexionBD();
+        }
+
+    }
+
+    public void initComponents(){
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
@@ -30,6 +38,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void conexionBD() {
+    String usuario = "";
+    String contrasena ="";
+    new validarUsuarioTask().execute(usuario, contrasena);
+    }
+
+    private class validarUssuarioTask extends AsyncTask<String, Void, String> {
+    @Override
+        protected String doInBackground(String... params) {
+            String usuario = params[0];
+            String contrasena = params[1];
+            String url = "http://10.0.2.2/validacuenta.php";
+        }
+
+
+    }
     public void validateFields(){
 
         //Empty fields
